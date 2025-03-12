@@ -10,18 +10,6 @@ export default function () {
   let res = http.get(`http://${TARGET_HOST}/auth`, {
     headers: headers,
   });
-
-  if ("members" in res.json() && Array.isArray(res.json("members"))) {
-    let ids = [];
-    for (let item of res.json("members")) {
-      ids.push(item["id"]);
-    }
-    console.log(ids);
-  } else {
-    let randomKey = Object.keys(res.json())[Math.floor(Object.keys(Math.random()*res.json()).length)];
-
-    console.log(randomKey, res.json(randomKey));
-  }
   
   const token = res.json('token');
 
@@ -41,4 +29,15 @@ export default function () {
 
   // Задание 6
 
+  if ("members" in res.json() && Array.isArray(res.json("members"))) {
+    let ids = [];
+    for (let item of res.json("members")) {
+      ids.push(item["id"]);
+    }
+    console.log(ids);
+  } else {
+    let randomKey = Object.keys(res.json())[Math.floor(Object.keys(Math.random()*res.json()).length)];
+
+    console.log(randomKey, res.json(randomKey));
+  }
 }
